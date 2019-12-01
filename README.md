@@ -10,13 +10,44 @@ Collect stars by solving puzzles. Two puzzles will be made available on each day
 
 ## Instructions
 
-You will need to run each module individually, so use the following in your terminal:
+There are two ways that you may run each of the tests.
+
+### 1. Manually in Terminal
+
+You will manually spin up each python script so that they run as "main".
+
+For example:
 
 ```shell script
 python3 adventofcode2019/day01/part1.py
 python3 adventofcode2019/day01/part2.py
 ```
 
-...and so on. I plan on avoiding dependencies for the challenges themselves, so you should not need to spin up your own environment to run the code.
+...and so on. I plan on avoiding dependencies for the challenges themselves, so you should not need to build an virtualenv.
+
+### 2. Using the helper
+
+To run the solution for a specific day and part:
+
+```shell script
+python3 aoc2019.py --day 1 --part 1 
+python3 aoc2019.py -d 1 -p 2
+```
+
+To run all parts for a day
+
+```shell script
+python3 aoc2019.py --day 1
+python3 aoc2019.py -d 1
+```
+
+Of course, you can always use the `--help` option for reference!
+
+## Finally
 
 You may find each day's narrative (with answers) in the README.md files in their respective folders.
+
+### Links
+
+ - [Advent of Code](https://adventofcode.com/)
+ - [Free Month of CodeCademy Pro (Shameless Affiliate Link)](http://ssqt.co/mQfDroD)

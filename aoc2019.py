@@ -2,19 +2,17 @@ import getopt
 import importlib
 import sys
 
-unix_options = ['hd:p:']
+unix_options = 'hd:p:'
 gnu_options = ['help', 'day=', 'part=']
 
 help_string = '''
-Advent of Code 2019 Helper Script 🎅
-
 In order for this script to work, you *must* insert at least a day.
 
 If you enter both a day and a part, the script will run that particular day and part. Otherwise, if you only enter a 
 day, it will show you both parts for that day. 
 
 --help, -h  ::  Show instructions & cmd options available
---day, -d   ::  Select the day you would like to run
+--day,  -d  ::  Select the day you would like to run
 --part, -p  ::  Select the part of the day you would like to run
 '''
 
