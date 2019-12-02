@@ -4,7 +4,14 @@ from adventofcode2019.solution import Solution
 
 
 class Day02P2(Solution):
-    pass
+    def __init__(self, input_file='input', test_input=None):
+        super(Day02P2, self).__init__(input_file, test_input)
+
+    @staticmethod
+    def parse_raw(raw_input):
+        return [int(i) for i in raw_input.split(',')]
+
+
 
 
 def solve(test_input=None):
