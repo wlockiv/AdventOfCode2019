@@ -18,14 +18,16 @@ day, it will show you both parts for that day.
 
 
 def get_solution(day, part):
-    module_string = f'adventofcode2019.day{day}.part{part}'
+    day_str = str(day).zfill(2)
+    part_str = str(part)
+    module_string = f'adventofcode2019.day{day_str}.part{part_str}'
     try:
         solution = importlib.import_module(module_string)
+        return solution.solve()
     except ImportError:
         print(f'I am not able to find the module for Day {day}, Part {part}')
         print('Are you sure they have been completed?')
-
-    return solution.solve()
+        sys.exit(2)
 
 
 if __name__ == '__main__':
@@ -59,12 +61,9 @@ if __name__ == '__main__':
         print(f'    Day: {day_input}')
         print(f'    Part: {part_input}')
     elif day_input and not part_input:
-        day_str = str(day_input).zfill(2)
-        print(f'Only a day was selected. Running all parts for Day {day_input}...')
+        print(f'Only a day was selected. Running all parts for Day {str(day_input).zfill(2)}...')
         for r in [1, 2]:
-            print(f'    Part {r}: {get_solution(day_str, r)}')
+            print(f'    Part {r}: {get_solution(day_input, r)}')
     else:
-        day_str = str(day_input).zfill(2)
-        part_str = str(part_input)
-        print(f'Running for Day {day_str.zfill(2)}, Part {part_str}')
-        print(f'    {get_solution(day_str, part_str)}')
+        print(f'Running for Day {str(day_input).zfill(2)}, Part {part_input}')
+        print(f'    {get_solution(day_input, part_input)}')

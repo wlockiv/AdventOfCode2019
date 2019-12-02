@@ -6,9 +6,7 @@ from adventofcode2019.solution import Solution
 
 
 class Day01P2(Solution):
-    def __init__(self, test_input=None):
-        location = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
-        input_file = os.path.join(location, 'input')
+    def __init__(self, input_file='input', test_input=None):
         super(Day01P2, self).__init__(input_file, test_input=test_input)
         self.mass_list = [Module(mass) for mass in self.parsed_input]
 
@@ -39,7 +37,10 @@ class Module(P1Module):
 
 
 def solve(test_input=None):
-    return Day01P2(test_input).solution
+    location = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
+    input_file = os.path.join(location, 'input')
+
+    return Day01P2(input_file, test_input).solution
 
 
 if __name__ == '__main__':
