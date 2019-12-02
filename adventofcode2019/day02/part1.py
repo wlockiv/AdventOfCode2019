@@ -6,10 +6,6 @@ from adventofcode2019.solution import Solution
 class Day02P1(Solution):
     def __init__(self, input_file='input', test_input=None):
         super(Day02P1, self).__init__(input_file, test_input)
-        # restoring the gravity assist program
-        self.parsed_input[1] = 12
-        self.parsed_input[2] = 2
-
 
     @staticmethod
     def parse_raw(raw_input):
@@ -22,30 +18,38 @@ class Day02P1(Solution):
 
         self.parsed_input[output_pos] = val_1 + val_2
 
-    def opcode_2(self, current_list):
-        val_1 = self.parsed_input[current_list[1]]
-        val_2 = self.parsed_input[current_list[2]]
-        output_pos = current_list[3]
+    def opcode_2(self, input_slice):
+        val_1 = self.parsed_input[input_slice[1]]
+        val_2 = self.parsed_input[input_slice[2]]
+        output_pos = input_slice[3]
 
         self.parsed_input[output_pos] = val_1 * val_2
 
-    @property
-    def solution(self):
-        start = 0
-        end = 4
+    @staticmethod
+    def run_all_instruction(data, noun=12, verb=2):
+        start, end = 0, 4
+        data[1] = noun
+        data[2] = verb
 
         while True:
-            current_list = self.parsed_input[start:end]
-            if current_list[0] == 1:
-                self.opcode_1(current_list)
-            elif current_list[0] == 2:
-                self.opcode_2(current_list)
-            elif current_list[0] == 99:
+            current_slice = data[start:end]
+            instruction = current_slice[0]
+            val_1, val_2 = data[current_slice[1]], data[current_slice[2]]
+            out_pos = current_slice[3]
+            if instruction == 1:
+                data[out_pos] = val_1 + val_2
+            elif instruction == 2:
+                data[out_pos] = val_1 * val_2
+            elif instruction == 99:
                 break
             start += 4
             end += 4
 
-        return self.parsed_input[0]
+        return data[0]
+
+    @property
+    def solution(self):
+        return self.run_all_instruction(self.parsed_input)
 
 
 def solve(test_input=None):
