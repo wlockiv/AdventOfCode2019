@@ -41,6 +41,13 @@ python3 aoc2019.py --day 1
 python3 aoc2019.py -d 1
 ```
 
+To run all parts for all days
+
+```shell script
+python3 aoc2019.py --all
+python3 aoc2019.py -a
+```
+
 Of course, you can always use the `--help` option for reference!
 
 ## Finally
