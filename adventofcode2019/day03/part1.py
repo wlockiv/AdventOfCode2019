@@ -1,6 +1,7 @@
 import os
 
 from adventofcode2019.solution import Solution
+from adventofcode2019.day03.grid import Grid
 
 
 class Day03P1(Solution):
@@ -17,53 +18,17 @@ class Day03P1(Solution):
 
     @property
     def solution(self):
-        origin = (0, 0)
-        wire_1_grid = Grid(origin)
+        wire_1_grid = Grid()
         for length in self.wire_1:
             wire_1_grid.walk(length['dir'], length['dist'])
 
-        wire_2_grid = Grid(origin)
+        wire_2_grid = Grid()
         for length in self.wire_2:
             wire_2_grid.walk(length['dir'], length['dist'])
 
-        intersects = [i for i in wire_1_grid.points if i in wire_2_grid.points and i != origin]
-        intersect_distances = [Grid.manhattan_dist(origin, p) for p in intersects]
+        intersects = [i for i in wire_1_grid.points if i in wire_2_grid.points and i != (0, 0)]
+        intersect_distances = [Grid.manhattan_dist((0, 0), p) for p in intersects]
         return min(intersect_distances)
-
-
-class Grid:
-    def __init__(self, origin=(0, 0)):
-        self.grid = {origin: 1}
-        self.pos = origin
-
-    @property
-    def points(self):
-        return self.grid.keys()
-
-    def __iter__(self):
-        return self.grid
-
-    def step(self, direction):
-        x, y = self.pos
-        x_step = 1 if direction == 'R' else -1 if direction == 'L' else 0
-        y_step = 1 if direction == 'U' else -1 if direction == 'D' else 0
-        next_pos = (x + x_step, y + y_step)
-
-        self.grid.setdefault(next_pos, 0)
-        self.grid[next_pos] += 1
-
-        self.pos = next_pos
-
-    def walk(self, direction, dist):
-        x, y = self.pos
-        for step in range(1, dist + 1):
-            self.step(direction)
-
-    @staticmethod
-    def manhattan_dist(point_1, point_2):
-        x_1, y_1 = point_1
-        x_2, y_2 = point_2
-        return abs(x_2 - x_1) + abs(y_2 - y_1)
 
 
 def solve(test_input=None):
