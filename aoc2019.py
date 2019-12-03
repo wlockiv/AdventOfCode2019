@@ -1,9 +1,12 @@
 import getopt
 import importlib
+import os
 import sys
+import time
+import re
 
-unix_options = 'hd:p:'
-gnu_options = ['help', 'day=', 'part=']
+unix_options = 'had:p:'
+gnu_options = ['help', 'all', 'day=', 'part=']
 
 help_string = '''
 In order for this script to work, you *must* insert at least a day.
@@ -40,6 +43,7 @@ if __name__ == '__main__':
         print(str(err))
         sys.exit(2)
 
+    all_flag = False
     day_input = 0
     part_input = 0
 
@@ -47,12 +51,23 @@ if __name__ == '__main__':
         if current_arg in ('-h', '--help'):
             print(help_string)
             sys.exit(0)
+        elif current_arg in ('-a', '--all'):
+            all_flag = True
         elif current_arg in ('-d', '--day'):
             day_input = int(current_value)
         elif current_arg in ('-p', '--part'):
             part_input = int(current_value)
 
-    if not day_input:
+    if all_flag:
+        print('Running all solutions ¯\\_(ツ)_/¯')
+        days = [d for d in os.listdir('adventofcode2019') if re.search(r'day\d{2}', d)]
+        days.sort()
+        for d in days:
+            print(f'Running for Day {d[3:]}:')
+            for p in [1, 2]:
+                start = time.time()
+                print(f'\tPart {p}: {get_solution(int(d[3:]), p)}\t\t\t{time.time() - start} seconds')
+    elif not day_input:
         print('You must select at least a day. Use --help for more info.')
         print(f'    Day: {day_input}')
         print(f'    Part: {part_input}')
@@ -63,7 +78,9 @@ if __name__ == '__main__':
     elif day_input and not part_input:
         print(f'Only a day was selected. Running all parts for Day {str(day_input).zfill(2)}...')
         for r in [1, 2]:
-            print(f'    Part {r}: {get_solution(day_input, r)}')
+            start = time.time()
+            print(f'\tPart {r}: {get_solution(day_input, r)}\t\t\t{time.time() - start} seconds')
     else:
+        start = time.time()
         print(f'Running for Day {str(day_input).zfill(2)}, Part {part_input}')
-        print(f'    {get_solution(day_input, part_input)}')
+        print(f'\t{get_solution(day_input, part_input)}\t\t\t{time.time() - start} seconds')

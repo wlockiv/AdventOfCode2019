@@ -1,19 +1,16 @@
 class Grid:
     def __init__(self):
-        self.grid = {(0, 0): 1}
+        self.grid = {}
         self.pos = (0, 0)
         self.__step_count = 0
 
     @property
     def points(self):
-        return self.grid.keys()
+        return self.grid
 
     @property
     def step_count(self):
         return self.__step_count
-
-    def __iter__(self):
-        return self.grid
 
     def step(self, direction):
         x, y = self.pos
@@ -21,11 +18,12 @@ class Grid:
         y_step = 1 if direction == 'U' else -1 if direction == 'D' else 0
         next_pos = (x + x_step, y + y_step)
 
-        self.grid.setdefault(next_pos, 0)
-        self.grid[next_pos] += 1
-
-        self.pos = next_pos
         self.__step_count += 1
+        # Use setdefault instead?
+        # self.grid.setdefault(next_pos, self.__step_count)
+        if next_pos not in self.grid:
+            self.grid[next_pos] = self.__step_count
+        self.pos = next_pos
 
     def walk(self, direction, dist):
         for step in range(1, dist + 1):

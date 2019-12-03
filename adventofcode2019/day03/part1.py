@@ -7,28 +7,25 @@ from adventofcode2019.day03.grid import Grid
 class Day03P1(Solution):
     def __init__(self, input_file='input', test_input=None):
         super(Day03P1, self).__init__(input_file, test_input)
-        self.wire_1, self.wire_2 = self.parsed_input
+        self.w1, self.w2 = self.parsed_input
 
     @staticmethod
     def parse_raw(raw_input):
         wires = [w.split(',') for w in raw_input.split('\n')]
-        wire_1 = [{'dir': i[0], 'dist': int(i[1:])} for i in wires[0]]
-        wire_2 = [{'dir': i[0], 'dist': int(i[1:])} for i in wires[1]]
-        return [wire_1, wire_2]
+        w1 = [{'dir': i[0], 'dist': int(i[1:])} for i in wires[0]]
+        w2 = [{'dir': i[0], 'dist': int(i[1:])} for i in wires[1]]
+        return [w1, w2]
 
     @property
     def solution(self):
-        wire_1_grid = Grid()
-        for length in self.wire_1:
-            wire_1_grid.walk(length['dir'], length['dist'])
+        w1_grid = Grid()
+        [w1_grid.walk(length['dir'], length['dist']) for length in self.w1]
 
-        wire_2_grid = Grid()
-        for length in self.wire_2:
-            wire_2_grid.walk(length['dir'], length['dist'])
+        w2_grid = Grid()
+        [w2_grid.walk(length['dir'], length['dist']) for length in self.w2]
 
-        intersects = [i for i in wire_1_grid.points if i in wire_2_grid.points and i != (0, 0)]
-        intersect_distances = [Grid.manhattan_dist((0, 0), p) for p in intersects]
-        return min(intersect_distances)
+        intersects = set(w1_grid.points.keys() & w2_grid.points.keys())
+        return min([Grid.manhattan_dist((0, 0), p) for p in intersects])
 
 
 def solve(test_input=None):

@@ -19,32 +19,13 @@ class Day03P2(Solution):
     @property
     def solution(self):
         w1_grid = Grid()
-        for length in self.w1:
-            w1_grid.walk(length['dir'], length['dist'])
+        [w1_grid.walk(length['dir'], length['dist']) for length in self.w1]
 
         w2_grid = Grid()
-        for length in self.w2:
-            w2_grid.walk(length['dir'], length['dist'])
+        [w2_grid.walk(length['dir'], length['dist']) for length in self.w2]
 
-        intersects = set(i for i in w1_grid.points if i in w2_grid.points and i != (0, 0))
-        steps_to_intersects = {}
-
-        for i in intersects:
-            w1_steps = 0
-            w1_grid.__init__()
-            for length in self.w1:
-                if w1_grid.walk_to_target(length['dir'], length['dist'], i):
-                    w1_steps = w1_grid.step_count
-
-            w2_steps = 0
-            w2_grid.__init__()
-            for length in self.w2:
-                if w2_grid.walk_to_target(length['dir'], length['dist'], i):
-                    w2_steps = w2_grid.step_count
-
-            steps_to_intersects[i] = w1_steps + w2_steps
-
-        return sorted(steps_to_intersects.items(), key=lambda kv: kv[1])[0][1]
+        intersects = set(w1_grid.points.keys() & w2_grid.points.keys())
+        return min([w1_grid.points[i] + w2_grid.points[i] for i in intersects])
 
 
 def solve(test_input=None):
