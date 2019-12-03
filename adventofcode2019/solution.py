@@ -1,5 +1,6 @@
 # Template class to be inherited for each day's solution.
 
+
 class Solution:
     def __init__(self, input_file, test_input=None):
         """
@@ -7,7 +8,6 @@ class Solution:
         """
         self.input_file = input_file
         self.parsed_input = self.parse_input_file() if test_input is None else self.parse_raw(test_input)
-        # self.__solution = None
 
     def parse_input_file(self):
         with open(self.input_file) as file:
