@@ -1,4 +1,4 @@
-# Day 3: Day 3: Crossed Wires
+# Day 3: Crossed Wires
 
 ## Part 1
 
