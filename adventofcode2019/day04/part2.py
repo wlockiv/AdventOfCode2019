@@ -1,24 +1,20 @@
 import os
 
-from adventofcode2019.solution import Solution
+from adventofcode2019.day04.part1 import Day04P1
 import re
 
 
-class Day04P2(Solution):
+class Day04P2(Day04P1):
     def __init__(self, input_file='input', test_input=None):
         super(Day04P2, self).__init__(input_file, test_input)
-
-    @staticmethod
-    def parse_raw(raw_input):
-        return [int(i) for i in raw_input.split('-')]
 
     @property
     def solution(self):
         answer = []
-        for n in range(self.parsed_input[0], self.parsed_input[1] + 1):
+        for n in self.parsed_input:
             n_str = str(n)
             if re.search(r'^(?=\d*$)1*2*3*4*5*6*7*8*9*$', n_str) and (matches := re.findall(r'(\d)\1+', n_str)):
-                if True in [(n_str.count(m) == 2) for m in matches]:
+                if any((n_str.count(m) == 2) for m in matches):
                     answer.append(n)
 
         return len(answer)

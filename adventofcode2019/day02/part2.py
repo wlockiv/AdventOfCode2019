@@ -19,7 +19,7 @@ class Day02P2(Day02P1):
                     return 100 * noun + verb
 
 
-def solve(test_input=None):
+def solve(test_input=None, noun=12, verb=2):
     location = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
     input_file = os.path.join(location, 'input')
 

@@ -7,12 +7,16 @@ class Solution:
         Boilerplate class for each day's solution. Import this class to inherit its basic methods.
         """
         self.input_file = input_file
-        self.parsed_input = self.parse_input_file() if test_input is None else self.parse_raw(test_input)
+        self.parsed_input = self.parse_input_file() if test_input is None else self.parse_test(test_input)
 
     def parse_input_file(self):
         with open(self.input_file) as file:
             raw_input = file.read()
         return self.parse_raw(raw_input)
+
+    @staticmethod
+    def parse_test(test_input):
+        return [int(test_input)]
 
     @staticmethod
     def parse_raw(raw_input):

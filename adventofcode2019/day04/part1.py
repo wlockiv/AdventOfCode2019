@@ -10,12 +10,13 @@ class Day04P1(Solution):
 
     @staticmethod
     def parse_raw(raw_input):
-        return [int(i) for i in raw_input.split('-')]
+        start, finish = [int(i) for i in raw_input.split('-')]
+        return set(range(start, finish + 1))
 
     @property
     def solution(self):
         answer = []
-        for n in range(self.parsed_input[0], self.parsed_input[1] + 1):
+        for n in self.parsed_input:
             if re.search(r'^(?=\d*$)1*2*3*4*5*6*7*8*9*$', str(n)) and re.search(r'(\d)\1+', str(n)):
                 answer.append(n)
 
