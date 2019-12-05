@@ -10,6 +10,13 @@ class Day03P1(Solution):
         self.w1, self.w2 = self.parsed_input
 
     @staticmethod
+    def parse_test(test_input):
+        wires = [w.split(',') for w in test_input.split('\n')]
+        w1 = [{'dir': i[0], 'dist': int(i[1:])} for i in wires[0]]
+        w2 = [{'dir': i[0], 'dist': int(i[1:])} for i in wires[1]]
+        return [w1, w2]
+
+    @staticmethod
     def parse_raw(raw_input):
         wires = [w.split(',') for w in raw_input.split('\n')]
         w1 = [{'dir': i[0], 'dist': int(i[1:])} for i in wires[0]]

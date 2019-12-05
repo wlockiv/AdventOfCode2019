@@ -30,7 +30,7 @@ class Day02P1(Solution):
         self.parsed_input[output_pos] = val_1 * val_2
 
     @staticmethod
-    def run_all_instruction(data, noun, verb):
+    def run_all_instruction(data, noun=12, verb=2):
         start, end = 0, 4
         data[1] = noun if noun is not None else data[1]
         data[2] = verb if verb is not None else data[2]
@@ -52,17 +52,18 @@ class Day02P1(Solution):
             else:
                 break
 
-        return data[0]
+        return data
 
-    def solution(self, noun, verb):
-        return self.run_all_instruction(self.parsed_input, noun, verb)
+    @property
+    def solution(self):
+        return self.run_all_instruction(self.parsed_input)[0]
 
 
-def solve(test_input=None, noun=12, verb=2):
+def solve(test_input=None):
     location = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
     input_file = os.path.join(location, 'input')
 
-    return Day02P1(input_file, test_input).solution(noun=noun, verb=verb)
+    return Day02P1(input_file, test_input).solution
 
 
 if __name__ == '__main__':

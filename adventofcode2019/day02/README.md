@@ -82,6 +82,6 @@ Find the input noun and verb that cause the program to produce the output `19690
 
 **Input included in `input`**
 
-** Solution:** `7912`
+**Solution:** `7912`
 
 

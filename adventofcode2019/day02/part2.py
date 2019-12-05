@@ -13,13 +13,13 @@ class Day02P2(Day02P1):
         for noun in range(100):
             for verb in range(100):
                 data = self.parsed_input[:]
-                output = self.run_all_instruction(data, noun, verb)
+                output = self.run_all_instruction(data, noun, verb)[0]
 
                 if output == target:
                     return 100 * noun + verb
 
 
-def solve(test_input=None, noun=12, verb=2):
+def solve(test_input=None):
     location = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
     input_file = os.path.join(location, 'input')
 
