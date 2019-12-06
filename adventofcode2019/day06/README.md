@@ -1,4 +1,4 @@
-# Day 6: The Tyranny of the Rocket Equation
+# Day 6: Universal Orbit Map
 
 ## Part 1
 
