@@ -37,13 +37,10 @@ class Day05P1(Solution):
                 val_1 = current_slice[1] if mode_1 else data[current_slice[1]]
                 val_2 = current_slice[2] if mode_2 else data[current_slice[2]]
                 out_pos = current_slice[3]
-                # Add
                 if opc == 1:
                     data[out_pos] = val_1 + val_2
-                # Multiply
                 elif opc == 2:
                     data[out_pos] = val_1 * val_2
-                #
                 elif opc == 7:
                     data[out_pos] = 1 if val_1 < val_2 else 0
                 elif opc == 8:
