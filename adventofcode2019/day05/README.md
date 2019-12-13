@@ -1,4 +1,4 @@
-# Day 2: 1202 Program Alarm
+# Day 5: Sunny with a Chance of Asteroids
 
 ## Part 1
 
