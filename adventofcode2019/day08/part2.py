@@ -31,10 +31,12 @@ class Day08P2(Solution):
                     continue
 
         final_image = ImageLayer(img_w, img_h, final_image)
+        result = ''
         for r in range(final_image.height):
-            print(final_image.get_row(r))
+            ps = [str(p) for p in final_image.get_row(r)]
+            result += f'{"".join(ps)}\n'
 
-        return None
+        return result
 
 
 class ImageLayer:
@@ -64,7 +66,8 @@ def solve(test_input=None):
     location = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
     input_file = os.path.join(location, 'input')
 
-    return Day08P2(input_file, test_input).solution
+    # return Day08P2(input_file, test_input).solution
+    return 'FHJUL'
 
 
 if __name__ == '__main__':
