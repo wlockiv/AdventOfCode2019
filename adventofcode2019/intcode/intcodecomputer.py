@@ -46,7 +46,7 @@ class IntcodeComputer:
     def run_program(self):
         while self.program.pointer < len(self.program.program):
             opcode = self.program.get_opcode()
-            if opc == 99:
+            if opcode == 99:
                 return self.program.program[0]
 
             self.run_opcode(opcode)
