@@ -1,7 +1,7 @@
 import os
-import sys
 
 from adventofcode2019.day05.part1 import Day05P1
+from adventofcode2019.intcode.intcodecomputer import IntcodeComputer
 
 
 class Day05P2(Day05P1):
@@ -10,7 +10,8 @@ class Day05P2(Day05P1):
 
     @property
     def solution(self):
-        return self.run_diagnostic(self.parsed_input, 5)[-1]
+        computer = IntcodeComputer(self.parsed_input.copy(), 5)
+        return computer.run_diagnostic()[0]
 
 
 def solve(test_input=None):

@@ -1,7 +1,7 @@
 import os
 import itertools
 
-from adventofcode2019.day05.part1 import Day05P1 as IntcodeComputer
+from adventofcode2019.day05._part1 import Day05P1 as IntcodeComputer
 
 
 class Day07P1(IntcodeComputer):

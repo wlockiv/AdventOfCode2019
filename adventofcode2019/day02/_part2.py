@@ -1,7 +1,6 @@
 import os
 
-from adventofcode2019.day02.part1 import Day02P1
-from adventofcode2019.intcode.intcodecomputer import IntcodeComputer
+from adventofcode2019.day02._part1 import Day02P1
 
 
 class Day02P2(Day02P1):
@@ -13,13 +12,11 @@ class Day02P2(Day02P1):
         target = 19690720
         for noun in range(100):
             for verb in range(100):
-                modified_input = self.parsed_input.copy()
-                modified_input[1], modified_input[2] = noun, verb
-                computer = IntcodeComputer(modified_input)
-                computer.run_program()
-                if computer.memory[0] == target:
+                data = self.parsed_input[:]
+                output = self.run_all_instruction(data, noun, verb)[0]
+
+                if output == target:
                     return 100 * noun + verb
-        return None
 
 
 def solve(test_input=None):
@@ -30,5 +27,5 @@ def solve(test_input=None):
 
 
 if __name__ == '__main__':
-    print(f'Day 02: Part 2')
+    print(f'Day 02: Part 1')
     print(f'\tSolution: {solve()}')

@@ -19,8 +19,8 @@ You will manually spin up each python script so that they run as "main".
 For example:
 
 ```shell script
-python3 adventofcode2019/day01/part1.py
-python3 adventofcode2019/day01/part2.py
+python3 adventofcode2019/day01/_part1.py
+python3 adventofcode2019/day01/_part2.py
 ```
 
 ...and so on. I plan on avoiding dependencies for the challenges themselves, so you should not need to build an virtualenv.

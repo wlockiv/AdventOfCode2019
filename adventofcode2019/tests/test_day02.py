@@ -1,6 +1,6 @@
 import unittest
 
-from adventofcode2019.day02.part1 import Day02P1 as Solution
+from adventofcode2019.day02._part1 import Day02P1 as Solution
 
 
 class TestDay02(unittest.TestCase):

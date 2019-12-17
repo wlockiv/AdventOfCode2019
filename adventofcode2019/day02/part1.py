@@ -1,6 +1,7 @@
 import os
 
 from adventofcode2019.solution import Solution
+from adventofcode2019.intcode.intcodecomputer import IntcodeComputer
 
 
 class Day02P1(Solution):
@@ -15,48 +16,15 @@ class Day02P1(Solution):
     def parse_raw(raw_input):
         return [int(i) for i in raw_input.split(',')]
 
-    def opcode_1(self, input_slice):
-        val_1 = self.parsed_input[input_slice[1]]
-        val_2 = self.parsed_input[input_slice[2]]
-        output_pos = input_slice[3]
-
-        self.parsed_input[output_pos] = val_1 + val_2
-
-    def opcode_2(self, input_slice):
-        val_1 = self.parsed_input[input_slice[1]]
-        val_2 = self.parsed_input[input_slice[2]]
-        output_pos = input_slice[3]
-
-        self.parsed_input[output_pos] = val_1 * val_2
-
-    @staticmethod
-    def run_all_instruction(data, noun=12, verb=2):
-        start, end = 0, 4
-        data[1] = noun if noun is not None else data[1]
-        data[2] = verb if verb is not None else data[2]
-
-        while True:
-            current_slice = data[start:end]
-            instruction = current_slice[0]
-            if instruction != 99:
-                val_1, val_2 = data[current_slice[1]], data[current_slice[2]]
-                out_pos = current_slice[3]
-                if instruction == 1:
-                    data[out_pos] = val_1 + val_2
-                elif instruction == 2:
-                    data[out_pos] = val_1 * val_2
-                else:
-                    print(f'Invalid instruction: {instruction}')
-                start += 4
-                end += 4
-            else:
-                break
-
-        return data
-
     @property
     def solution(self):
-        return self.run_all_instruction(self.parsed_input)[0]
+        modified_input = self.parsed_input.copy()
+        # Input modified per instruction
+        modified_input[1] = 12
+        modified_input[2] = 2
+        computer = IntcodeComputer(modified_input)
+        computer.run_program()
+        return computer.memory[0]
 
 
 def solve(test_input=None):
