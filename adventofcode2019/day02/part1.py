@@ -1,7 +1,7 @@
 import os
 
 from adventofcode2019.solution import Solution
-from adventofcode2019.intcode.intcodecomputer import IntcodeComputer
+from adventofcode2019.intcodecomputer import IntcodeComputer
 
 
 class Day02P1(Solution):

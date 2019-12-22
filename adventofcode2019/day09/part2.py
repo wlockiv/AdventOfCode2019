@@ -2,7 +2,7 @@ import math
 import os
 import itertools
 
-from adventofcode2019.day07.part1 import Day07P1
+from adventofcode2019.day07._part1 import Day07P1
 
 
 class Day07P2(Day07P1):

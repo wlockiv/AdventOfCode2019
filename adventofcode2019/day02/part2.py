@@ -1,7 +1,7 @@
 import os
 
 from adventofcode2019.day02.part1 import Day02P1
-from adventofcode2019.intcode.intcodecomputer import IntcodeComputer
+from adventofcode2019.intcodecomputer import IntcodeComputer
 
 
 class Day02P2(Day02P1):
