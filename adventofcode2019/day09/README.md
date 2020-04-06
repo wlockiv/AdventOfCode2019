@@ -1,47 +1,60 @@
-# Day 1: The Tyranny of the Rocket Equation
+# Day 9: Sensor Boost 
 
 ## Part 1
-Santa has become stranded at the edge of the Solar System while delivering presents to other planets! To accurately calculate his position in space, safely align his warp drive, and return to Earth in time to save Christmas, he needs you to bring him measurements from fifty stars.
 
-Collect stars by solving puzzles. Two puzzles will be made available on each day in the Advent calendar; the second puzzle is unlocked when you complete the first. Each puzzle grants one star. Good luck!
+You've just said goodbye to the rebooted rover and left Mars when you receive a faint distress signal coming from the asteroid belt. It must be the Ceres monitoring station!
 
-The Elves quickly load you into a spacecraft and prepare to launch.
+In order to lock on to the signal, you'll need to boost your sensors. The Elves send up the latest BOOST program - Basic Operation Of System Test.
 
-At the first Go / No Go poll, every Elf is Go until the Fuel Counter-Upper. They haven't determined the amount of fuel required yet.
+While BOOST (your puzzle input) is capable of boosting your sensors, for tenuous safety reasons, it refuses to do so until the computer it runs on passes some checks to demonstrate it is a complete Intcode computer.
 
-Fuel required to launch a given module is based on its mass. Specifically, to find the fuel required for a module, take its mass, divide by three, round down, and subtract 2.
+Your existing Intcode computer is missing one key feature: it needs support for parameters in relative mode.
 
-For example:
+Parameters in mode 2, relative mode, behave very similarly to parameters in position mode: the parameter is interpreted as a position. Like position mode, parameters in relative mode can be read from or written to.
 
- - For a mass of `12`, divide by `3` and round down to get `4`, then subtract `2` to get `2`.
- - For a mass of `14`, dividing by `3` and rounding down still yields `4`, so the fuel required is also `2`.
- - For a mass of `1969`, the fuel required is `654`.
- - For a mass of `100756`, the fuel required is `33583`.
+The important difference is that relative mode parameters don't count from address 0. Instead, they count from a value called the relative base. The relative base starts at 0.
+
+The address a relative mode parameter refers to is itself plus the current relative base. When the relative base is 0, relative mode parameters and position mode parameters with the same value refer to the same address.
+
+For example, given a relative base of 50, a relative mode parameter of -7 refers to memory address 50 + -7 = 43.
+
+The relative base is modified with the relative base offset instruction:
+
+ - Opcode 9 adjusts the relative base by the value of its only parameter. The relative base increases (or decreases, if the value is negative) by the value of the parameter.
+
+For example, if the relative base is 2000, then after the instruction 109,19, the relative base would be 2019. If the next instruction were 204,-34, then the value at address 1985 would be output.
+
+Your Intcode computer will also need a few other capabilities:
+
+ - The computer's available memory should be much larger than the initial program. Memory beyond the initial program starts with the value 0 and can be read or written like any other memory. (It is invalid to try to access memory at a negative address, though.)
+ - The computer should have support for large numbers. Some instructions near the beginning of the BOOST program will verify this capability.
+
+Here are some example programs that use these features:
+
+ - 109,1,204,-1,1001,100,1,100,1008,100,16,101,1006,101,0,99 takes no input and produces a copy of itself as output.
+ - 1102,34915192,34915192,7,4,7,99,0 should output a 16-digit number.
+ - 104,1125899906842624,99 should output the large number in the middle.
  
-The Fuel Counter-Upper needs to know the total fuel requirement. To find it, individually calculate the fuel needed for the mass of each module (your puzzle input), then add together all the fuel values.
+The BOOST program will ask for a single input; run it in test mode by providing it the value 1. It will perform a series of checks on each opcode, output any opcodes (and the associated parameter modes) that seem to be functioning incorrectly, and finally output a BOOST keycode.
 
-What is the sum of the fuel requirements for all of the modules on your spacecraft?
+Once your Intcode computer is fully functional, the BOOST program should report no malfunctioning opcodes when run in test mode; it should only output a single value, the BOOST keycode. What BOOST keycode does it produce?
 
 **Input included in `input`**
 
-**Solution:** `3317100`
+**Solution:** `2399197539`
 
 
 ## Part 2
 
-During the second Go / No Go poll, the Elf in charge of the Rocket Equation Double-Checker stops the launch sequence. Apparently, you forgot to include additional fuel for the fuel you just added.
+You now have a complete Intcode computer.
 
-Fuel itself requires fuel just like a module - take its mass, divide by three, round down, and subtract 2. However, that fuel also requires fuel, and that fuel requires fuel, and so on. Any mass that would require negative fuel should instead be treated as if it requires zero fuel; the remaining mass, if any, is instead handled by wishing really hard, which has no mass and is outside the scope of this calculation.
+Finally, you can lock on to the Ceres distress signal! You just need to boost your sensors using the BOOST program.
 
-So, for each module mass, calculate its fuel and add it to the total. Then, treat the fuel amount you just calculated as the input mass and repeat the process, continuing until a fuel requirement is zero or negative. For example:
+The program runs in sensor boost mode by providing the input instruction the value 2. Once run, it will boost the sensors automatically, but it might take a few seconds to complete the operation on slower hardware. In sensor boost mode, the program will output a single value: the coordinates of the distress signal.
 
- - A module of mass `14` requires `2` fuel. This fuel requires no further fuel (`2` divided by `3` and rounded down is `0`, which would call for a negative fuel), so the total fuel required is still just `2`.
- - At first, a module of mass `1969` requires 654 fuel. Then, this fuel requires `216` more fuel `(654 / 3 - 2)`. `216` then requires `70` more fuel, which requires `21` fuel, which requires `5` fuel, which requires no further fuel. So, the total fuel required for a module of mass `1969` is `654 + 216 + 70 + 21 + 5 = 966`.
- - The fuel required by a module of mass `100756` and its fuel is: `33583 + 11192 + 3728 + 1240 + 411 + 135 + 43 + 12 + 2 = 50346`.
- 
- What is the sum of the fuel requirements for all of the modules on your spacecraft when also taking into account the mass of the added fuel? (Calculate the fuel requirements for each module separately, then add them all up at the end.)
+Run the BOOST program in sensor boost mode. What are the coordinates of the distress signal?
  
  **Input is the same as Part 1. Included in `input`**
  
- **Solution:** `4972784`
+ **Solution:** `35106`
 
