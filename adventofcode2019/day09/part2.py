@@ -105,5 +105,5 @@ def solve(test_input=None):
 
 
 if __name__ == '__main__':
-    print(f'Day 01: Part 2')
+    print(f'Day 09: Part 2')
     print(f'\tSolution: {solve()}')
